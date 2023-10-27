@@ -20,7 +20,7 @@ public class RestauranteMain {
     public static void main(String[] args) {
         
         MesaData mesaData = new MesaData();
-        
+//        Agregar mesas**********************************
 //        Mesa mesa1 = new Mesa(1, true, 4);
 //        Mesa mesa2 = new Mesa(2, false, 2);
 //        mesaData.agregarMesa(mesa2);
