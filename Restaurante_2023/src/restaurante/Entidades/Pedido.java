@@ -5,6 +5,7 @@
 package restaurante.Entidades;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
@@ -15,30 +16,33 @@ public class Pedido {
     private int id_pedido;
     private Mesa mesa;
     private String nombre_mesero;
-    private LocalDate fecha_hora;
+    private LocalDate fecha;
     private double importe;
     private boolean cobrada;
+    private LocalTime hora;
 
     public Pedido() {
     }
     
     
 
-    public Pedido(int id_pedido, Mesa mesa, String nombre_mesero, LocalDate fecha_hora, double importe, boolean cobrada) {
+    public Pedido(int id_pedido, Mesa mesa, String nombre_mesero, LocalDate fecha, double importe, boolean cobrada, LocalTime hora) {
         this.id_pedido = id_pedido;
         this.mesa = mesa;
         this.nombre_mesero = nombre_mesero;
-        this.fecha_hora = fecha_hora;
+        this.fecha = fecha;
         this.importe = importe;
         this.cobrada = cobrada;
+        this.hora = hora;
     }
 
-    public Pedido(Mesa mesa, String nombre_mesero, LocalDate fecha_hora, double importe, boolean cobrada) {
+    public Pedido(Mesa mesa, String nombre_mesero, LocalDate fecha, double importe, boolean cobrada, LocalTime hora) {
         this.mesa = mesa;
         this.nombre_mesero = nombre_mesero;
-        this.fecha_hora = fecha_hora;
+        this.fecha = fecha;
         this.importe = importe;
         this.cobrada = cobrada;
+        this.hora = hora;
     }
 
     public int getId_pedido() {
@@ -65,12 +69,12 @@ public class Pedido {
         this.nombre_mesero = nombre_mesero;
     }
 
-    public LocalDate getFecha_hora() {
-        return fecha_hora;
+    public LocalDate getFecha() {
+        return fecha;
     }
 
-    public void setFecha_hora(LocalDate fecha_hora) {
-        this.fecha_hora = fecha_hora;
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
     public double getImporte() {
@@ -89,9 +93,19 @@ public class Pedido {
         this.cobrada = cobrada;
     }
 
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+
+    
+    
     @Override
     public String toString() {
-        return "Pedido{" + "id_pedido=" + id_pedido + ", mesa=" + mesa + ", nombre_mesero=" + nombre_mesero + ", fecha_hora=" + fecha_hora + ", importe=" + importe + ", cobrada=" + cobrada + '}';
+        return "Pedido{" + "id_pedido=" + id_pedido + ", mesa=" + mesa + ", nombre_mesero=" + nombre_mesero + ", fecha=" + fecha + ", importe=" + importe + ", cobrada=" + cobrada + ", hora=" + hora + '}';
     }
     
     
