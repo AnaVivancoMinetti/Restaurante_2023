@@ -41,8 +41,6 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jrbCobrado = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jtfImporte = new javax.swing.JTextField();
 
         jLabel1.setText("Añadir Pedido");
 
@@ -84,8 +82,6 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Cobrado");
 
-        jLabel7.setText("Importe $");
-
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
@@ -95,50 +91,39 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritorioLayout.createSequentialGroup()
-                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EscritorioLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)))
-                    .addGroup(EscritorioLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)))
+                .addGap(48, 48, 48)
+                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
+                .addComponent(jbAñadir)
+                .addGap(49, 49, 49))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritorioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(EscritorioLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(EscritorioLayout.createSequentialGroup()
-                                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfHora, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(128, 128, 128))
-                            .addGroup(EscritorioLayout.createSequentialGroup()
-                                .addComponent(jbAñadir)
-                                .addGap(49, 49, 49))))
+                        .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfHora, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EscritorioLayout.createSequentialGroup()
-                        .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EscritorioLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jrbCobrado))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EscritorioLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
+                        .addGap(19, 19, 19)
+                        .addComponent(jrbCobrado)
+                        .addGap(45, 45, 45)))
+                .addGap(127, 127, 127))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritorioLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -162,13 +147,8 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
                         .addComponent(jrbCobrado))
                     .addGroup(EscritorioLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(8, 8, 8)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbAñadir))
@@ -202,7 +182,7 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
         pedido.setNombre_mesero(jtfMesero.getText());
         pedido.setFecha(jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         pedido.setHora(obtenerHora().toLocalTime());
-        pedido.setImporte(Double.parseDouble(jtfImporte.getText()));
+        pedido.setImporte(0.0);
         pedido.setCobrada(jrbCobrado.isSelected());
         
         pedidoData.agregarPedido(pedido);
@@ -230,13 +210,11 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jbAñadir;
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JRadioButton jrbCobrado;
     private javax.swing.JTextField jtfHora;
-    private javax.swing.JTextField jtfImporte;
     private javax.swing.JTextField jtfMesero;
     // End of variables declaration//GEN-END:variables
     

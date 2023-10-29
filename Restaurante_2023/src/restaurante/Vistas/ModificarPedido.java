@@ -47,8 +47,6 @@ public class ModificarPedido extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jcbPedidos = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        jtfImporte = new javax.swing.JTextField();
 
         jLabel1.setText("Modificar Pedido");
 
@@ -85,14 +83,6 @@ public class ModificarPedido extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel8.setText("Importe $");
-
-        jtfImporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfImporteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
@@ -121,10 +111,6 @@ public class ModificarPedido extends javax.swing.JInternalFrame {
                             .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(EscritorioLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jcbPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritorioLayout.createSequentialGroup()
                                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -157,8 +143,6 @@ public class ModificarPedido extends javax.swing.JInternalFrame {
                         .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(46, 46, 46)
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jtfImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(45, 45, 45)
@@ -199,7 +183,6 @@ public class ModificarPedido extends javax.swing.JInternalFrame {
 
             pedido.setNombre_mesero(jtfMesero.getText());
             pedido.setFecha(jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            pedido.setImporte(Double.parseDouble(jtfImporte.getText()));
             pedido.setCobrada(jrbCobrado.isSelected());
             pedido.setHora(obtenerHora().toLocalTime());
 
@@ -219,10 +202,6 @@ public class ModificarPedido extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void jtfImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfImporteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfImporteActionPerformed
-
     private void jcbPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPedidosActionPerformed
         mostrarDatos();        // TODO add your handling code here:
     }//GEN-LAST:event_jcbPedidosActionPerformed
@@ -236,14 +215,12 @@ public class ModificarPedido extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Pedido> jcbPedidos;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JRadioButton jrbCobrado;
     private javax.swing.JTextField jtfHora;
-    private javax.swing.JTextField jtfImporte;
     private javax.swing.JTextField jtfMesero;
     // End of variables declaration//GEN-END:variables
 
@@ -258,7 +235,6 @@ private void cargarComboPedido(){
 private void vaciarCampos(){
         jtfMesero.setText("");
         jtfHora.setText("");
-        jtfImporte.setText("");
         jrbCobrado.setSelected(false);
         jdcFecha.setDate(null);
     }
@@ -290,7 +266,6 @@ private void mostrarDatos(){
     Pedido pedido = (Pedido)jcbPedidos.getSelectedItem(); 
     jtfMesero.setText(pedido.getNombre_mesero());
     jdcFecha.setDate(Date.valueOf(pedido.getFecha()));
-    jtfImporte.setText(pedido.getImporte()+"");
     jtfHora.setText(pedido.getHora()+"");
     jrbCobrado.setSelected(pedido.isCobrada());
     

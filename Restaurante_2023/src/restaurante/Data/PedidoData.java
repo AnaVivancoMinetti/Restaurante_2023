@@ -58,17 +58,16 @@ public class PedidoData {
 
     public void modificarPedido(Pedido pedido) {
         System.out.println("Entro a modificar");
-        String updateQuery = "UPDATE pedido SET nombre_mesero = ?, fecha = ?, importe = ?, cobrada = ?, hora = ? WHERE id_pedido = ?";
+        String updateQuery = "UPDATE pedido SET nombre_mesero = ?, fecha = ?, cobrada = ?, hora = ? WHERE id_pedido = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
 
             preparedStatement.setString(1, pedido.getNombre_mesero());
             preparedStatement.setDate(2, Date.valueOf(pedido.getFecha()));
-            preparedStatement.setDouble(3, pedido.getImporte());
-            preparedStatement.setBoolean(4, pedido.isCobrada());
-            preparedStatement.setTime(5, Time.valueOf(pedido.getHora()));
-            preparedStatement.setInt(6, pedido.getId_pedido());
+            preparedStatement.setBoolean(3, pedido.isCobrada());
+            preparedStatement.setTime(4, Time.valueOf(pedido.getHora()));
+            preparedStatement.setInt(5, pedido.getId_pedido());
 
             if (preparedStatement.executeUpdate() != 0) {
                 JOptionPane.showMessageDialog(null, "Pedido modificado");

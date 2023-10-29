@@ -49,9 +49,11 @@ public class RestauranteMain {
 ////**************************************CREO PEDIDO Y DESPUÉS LO MODIFICO
 //Mesa mesaY = new Mesa(7, false, 2);
 //mesaData.agregarMesa(mesaY);
-
-//Pedido pedido3= new Pedido(mesita1, "Lorena", LocalDate.of(2023,11,11), 10000, false, LocalTime.of(19, 55));
-//pedidoData.agregarPedido(pedido3);
+Mesa mesaEncontrada = mesaData.buscarMesaPorId(1);
+Pedido pedido3= new Pedido(mesaEncontrada, "Luciana", LocalDate.of(2023,11,11), 0.0, false, LocalTime.of(19, 55));
+pedidoData.agregarPedido(pedido3);
+pedido3.setNombre_mesero("Pedro");
+pedidoData.modificarPedido(pedido3);
 
 //pedido3.setImporte(7000);
 

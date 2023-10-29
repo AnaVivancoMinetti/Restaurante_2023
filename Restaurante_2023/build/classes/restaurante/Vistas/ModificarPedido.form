@@ -63,11 +63,6 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtfImporte" min="-2" pref="75" max="-2" attributes="0"/>
-                              </Group>
                               <Component id="jcbPedidos" min="-2" pref="257" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -113,8 +108,6 @@
                   </Group>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfImporte" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtfHora" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -209,16 +202,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Pedido&gt;"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Importe $"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtfImporte">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfImporteActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
