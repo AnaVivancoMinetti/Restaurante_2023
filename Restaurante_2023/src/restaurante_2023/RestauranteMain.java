@@ -13,6 +13,7 @@ import restaurante.Data.MesaData;
 import restaurante.Data.PedidoData;
 import restaurante.Entidades.Mesa;
 import restaurante.Entidades.Pedido;
+import restaurante.Entidades.PedidoProducto;
 
 /**
  *
@@ -44,37 +45,34 @@ public class RestauranteMain {
 //        
 //        pedidoData.buscarPedidoPorID(1);
 //        System.out.println("Pedido encontrado:" + pedidoData.buscarPedidoPorID(1));
-//Mesa mesaX = new Mesa(6, true, 2);
-//mesaData.agregarMesa(mesaX);
 
 ////**************************************CREO PEDIDO Y DESPUÉS LO MODIFICO
 //Mesa mesaY = new Mesa(7, false, 2);
 //mesaData.agregarMesa(mesaY);
-//Mesa mesita1 = new Mesa(9, false, 4);
-//mesaData.agregarMesa(mesita1);
-//        System.out.println("Mesa: ");
-//        System.out.println(mesita1);
+
 //Pedido pedido3= new Pedido(mesita1, "Lorena", LocalDate.of(2023,11,11), 10000, false, LocalTime.of(19, 55));
 //pedidoData.agregarPedido(pedido3);
-////        System.out.println("Mesa: " + mesaY);
-//        System.out.println("Pedido: " + pedido3);
-//        
+
 //pedido3.setImporte(7000);
-Pedido pedido = pedidoData.buscarPedidoPorID(4);
-//pedido.setNombre_mesero("Fulano");
+
+//Pedido pedido = pedidoData.buscarPedidoPorID(10);
+//Producto producto 
+//pedido.setImporte(10000);
 //pedidoData.modificarPedido(pedido);
 //
 //Pedido pedidoEncontrado = pedidoData.buscarPedidoPorID(3);
 //        System.out.println("PEDIDO ENCONTRADO: " + pedidoEncontrado);
 //
 //    pedidoData.reactivarPedido(pedidoData.buscarPedidoPorID(6));
-    pedidoData.reactivarPedido(pedido);
+    //pedidoData.cobrarPedido(pedido);
     
 //*******************************************COBRO PRODUCTO Y DESPUÉS LO "REACTIVO"
     //pedidoData.cobrarPedido(pedidoData.buscarPedidoPorID(2));
     //pedidoData.reactivarPedido(pedidoData.buscarPedidoPorID(2));
     
     
+//***************************************************************ACÁ PRUEBO AÑADIR DETALLE
+//PedidoProducto pedidoprod = new PedidoProducto()
     
     
 //***************************************************************ACÁ QUERÍA PROBAR LAS LISTAS    

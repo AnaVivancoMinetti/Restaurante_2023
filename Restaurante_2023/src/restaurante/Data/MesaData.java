@@ -2,6 +2,8 @@
 package restaurante.Data;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 import restaurante.Entidades.Mesa;
@@ -63,7 +65,69 @@ public class MesaData {
     
     }
     
+    public List<Mesa> listarMesaDesocupadas() {
+        List<Mesa> mesas = new ArrayList<>();
+        try {
+            String selectQuery = "SELECT * FROM mesa WHERE estado_mesa=0";
+            PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Mesa mesa = new Mesa(
+                        resultSet.getInt("id_mesa"),
+                        resultSet.getInt("numero_mesa"),
+                        resultSet.getBoolean("estado_mesa"), 
+                        resultSet.getInt("capacidad"));
+                
+                
+                mesas.add(mesa);
+            }
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa" + ex.getMessage());
+        }
+        return mesas;
+    }
     
+    public List<Mesa> listarMesaOcupadas() {
+        List<Mesa> mesas = new ArrayList<>();
+        try {
+            String selectQuery = "SELECT * FROM mesa WHERE estado_mesa=1";
+            PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Mesa mesa = new Mesa(
+                        resultSet.getInt("id_mesa"),
+                        resultSet.getInt("numero_mesa"),
+                        resultSet.getBoolean("estado_mesa"), 
+                        resultSet.getInt("capacidad"));
+
+                mesas.add(mesa);
+            }
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa" + ex.getMessage());
+        }
+        return mesas;
+    }
+    
+    
+    public void eliminarMesaPorId(int idMesa){
+        
+        try {
+            String upDateQuery = "UPDATE mesa SET estado_mesa = 0 WHERE id_mesa = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(upDateQuery);
+            preparedStatement.setInt(1, idMesa);
+            int seModifico = preparedStatement.executeUpdate();
+            if (seModifico >= 1) {
+                JOptionPane.showMessageDialog(null, "Se eliminó el Mesa.");
+            }else{
+                JOptionPane.showMessageDialog(null, "Mesa no existe");
+            }
+            preparedStatement.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa: "+e.getMessage());
+        }
+    }
     
 }
     

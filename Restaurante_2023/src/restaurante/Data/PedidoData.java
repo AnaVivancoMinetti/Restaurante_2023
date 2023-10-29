@@ -57,22 +57,24 @@ public class PedidoData {
     }
 
     public void modificarPedido(Pedido pedido) {
-        String updateQuery = "UPDATE pedido SET id_mesa = ?, nombre_mesero = ?, fecha = ?, importe = ?, cobrada = ?, hora = ? WHERE id_pedido = ?";
+        System.out.println("Entro a modificar");
+        String updateQuery = "UPDATE pedido SET nombre_mesero = ?, fecha = ?, importe = ?, cobrada = ?, hora = ? WHERE id_pedido = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
-            preparedStatement.setInt(1, pedido.getMesa().getIdMesa());//***********************get ID o get NUM??
-            preparedStatement.setString(2, pedido.getNombre_mesero());
-            preparedStatement.setDate(3, Date.valueOf(pedido.getFecha()));
-            //alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
-            //ps.setDate(4, Date.valueOf(pedido.getFecha()));
-            preparedStatement.setDouble(4, pedido.getImporte());
-            preparedStatement.setBoolean(5, pedido.isCobrada());
-            preparedStatement.setTime(6, Time.valueOf(pedido.getHora()));
-            preparedStatement.setInt(7, pedido.getId_pedido());
+
+            preparedStatement.setString(1, pedido.getNombre_mesero());
+            preparedStatement.setDate(2, Date.valueOf(pedido.getFecha()));
+            preparedStatement.setDouble(3, pedido.getImporte());
+            preparedStatement.setBoolean(4, pedido.isCobrada());
+            preparedStatement.setTime(5, Time.valueOf(pedido.getHora()));
+            preparedStatement.setInt(6, pedido.getId_pedido());
 
             if (preparedStatement.executeUpdate() != 0) {
                 JOptionPane.showMessageDialog(null, "Pedido modificado");
+            } else {
+
+                JOptionPane.showMessageDialog(null, "No existe el pedido/no se pudooo");
             }
 
             preparedStatement.close();
@@ -96,13 +98,13 @@ public class PedidoData {
                 Mesa mesa = mesaData.buscarMesaPorId(id_mesa);
 
                 pedido = new Pedido();
-                        pedido.setId_pedido(idPedido);
-                        pedido.setMesa(mesa);
-                        pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
-                        pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
-                        pedido.setImporte(resultSet.getDouble("importe"));
-                        pedido.setCobrada(resultSet.getBoolean("cobrada"));
-                        pedido.setHora(resultSet.getTime("hora").toLocalTime());
+                pedido.setId_pedido(idPedido);
+                pedido.setMesa(mesa);
+                pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
+                pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
+                pedido.setImporte(resultSet.getDouble("importe"));
+                pedido.setCobrada(resultSet.getBoolean("cobrada"));
+                pedido.setHora(resultSet.getTime("hora").toLocalTime());
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró pedido con ese ID");
             }
@@ -114,7 +116,7 @@ public class PedidoData {
 
         return pedido;
     }
-    
+
     public void cobrarPedido(Pedido pedido) {
         try {
             int idPedido = pedido.getId_pedido();
@@ -133,7 +135,7 @@ public class PedidoData {
 
     }
 
-     public void reactivarPedido(Pedido pedido) { 
+    public void reactivarPedido(Pedido pedido) {
         try {
             int idPedido = pedido.getId_pedido();
             String updateQuery = "UPDATE pedido SET cobrada = 0 WHERE id_pedido = ?";
@@ -150,7 +152,42 @@ public class PedidoData {
         }
 
     }
-    
+
+    public ArrayList<Pedido> buscarPedidoPorMesero(String nombre_mesero) {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        Pedido pedido = null;
+        String selectQuery = "SELECT * FROM pedido WHERE nombre_mesero = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+            preparedStatement.setString(1, nombre_mesero);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next()) {
+                JOptionPane.showMessageDialog(null, "No se encontraron pedidos del mesero/no existe el mesero");
+            } else {
+                while (resultSet.next()) {
+                    Mesa mesa = mesaData.buscarMesaPorId(resultSet.getInt("id_mesa"));
+
+                    pedido = new Pedido();
+                    pedido.setId_pedido(resultSet.getInt("id_pedido"));
+                    pedido.setMesa(mesa);
+                    pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
+                    pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
+                    pedido.setImporte(resultSet.getDouble("importe"));
+                    pedido.setCobrada(resultSet.getBoolean("cobrada"));
+                    pedido.setHora(resultSet.getTime("hora").toLocalTime());
+
+                    pedidos.add(pedido);
+
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener los pedidos del mesero. Error al acceder a la tabla Pedidos: " + ex.getMessage());
+        }
+
+        return pedidos;
+    }
+
     public ArrayList<Pedido> buscarPedidoPorMesa(int idMesa) {
         ArrayList<Pedido> pedidos = new ArrayList<>();
         Pedido pedido = null;
@@ -165,13 +202,16 @@ public class PedidoData {
                 Mesa mesa = mesaData.buscarMesaPorId(idMesa);
 
                 pedido = new Pedido();
-                        pedido.setId_pedido(resultSet.getInt("id_pedido"));
-                        pedido.setMesa(mesa);
-                        pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
-                        pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
-                        pedido.setImporte(resultSet.getDouble("importe"));
-                        pedido.setCobrada(resultSet.getBoolean("cobrada"));
-                        pedido.setHora(resultSet.getTime("hora").toLocalTime());
+                pedido.setId_pedido(resultSet.getInt("id_pedido"));
+                pedido.setMesa(mesa);
+                pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
+                pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
+                pedido.setImporte(resultSet.getDouble("importe"));
+                pedido.setCobrada(resultSet.getBoolean("cobrada"));
+                pedido.setHora(resultSet.getTime("hora").toLocalTime());
+
+                pedidos.add(pedido);
+
             }
 
             preparedStatement.close();
@@ -186,11 +226,11 @@ public class PedidoData {
     public ArrayList<Pedido> buscarPedidoPorFecha(LocalDate fecha) {
         ArrayList<Pedido> pedidos = new ArrayList<>();
         Pedido pedido = null;
-        String selectQuery = "SELECT * FROM pedido WHERE fecha_hora  = ?";
+        String selectQuery = "SELECT * FROM pedido WHERE fecha  = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
             preparedStatement.setDate(1, Date.valueOf(fecha));
-              //alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+            //alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
             //ps.setDate(4, Date.valueOf(pedido.getFecha()));
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -199,13 +239,16 @@ public class PedidoData {
                 Mesa mesa = mesaData.buscarMesaPorId(resultSet.getInt("id_mesa"));
 
                 pedido = new Pedido();
-                        pedido.setId_pedido(resultSet.getInt("id_pedido"));
-                        pedido.setMesa(mesa);
-                        pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
-                        pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
-                        pedido.setImporte(resultSet.getDouble("importe"));
-                        pedido.setCobrada(resultSet.getBoolean("cobrada"));
-                        pedido.setHora(resultSet.getTime("hora").toLocalTime());
+                pedido.setId_pedido(resultSet.getInt("id_pedido"));
+                pedido.setMesa(mesa);
+                pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
+                pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
+                pedido.setImporte(resultSet.getDouble("importe"));
+                pedido.setCobrada(resultSet.getBoolean("cobrada"));
+                pedido.setHora(resultSet.getTime("hora").toLocalTime());
+
+                pedidos.add(pedido);
+
             }
 
             preparedStatement.close();
@@ -217,7 +260,7 @@ public class PedidoData {
         return pedidos;
     }
 
-    public ArrayList<Pedido> pedidosSinCobrar(){
+    public ArrayList<Pedido> pedidosSinCobrar() {
         ArrayList<Pedido> pedidos = new ArrayList<>();
         Pedido pedido = null;
         String selectQuery = "SELECT * FROM pedido WHERE cobrada  = 0";
@@ -231,13 +274,16 @@ public class PedidoData {
                 Mesa mesa = mesaData.buscarMesaPorId(resultSet.getInt("id_mesa"));
 
                 pedido = new Pedido();
-                        pedido.setId_pedido(resultSet.getInt("id_pedido"));
-                        pedido.setMesa(mesa);
-                        pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
-                        pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
-                        pedido.setImporte(resultSet.getDouble("importe"));
-                        pedido.setCobrada(resultSet.getBoolean("cobrada"));
-                        pedido.setHora(resultSet.getTime("hora").toLocalTime());
+                pedido.setId_pedido(resultSet.getInt("id_pedido"));
+                pedido.setMesa(mesa);
+                pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
+                pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
+                pedido.setImporte(resultSet.getDouble("importe"));
+                pedido.setCobrada(resultSet.getBoolean("cobrada"));
+                pedido.setHora(resultSet.getTime("hora").toLocalTime());
+
+                pedidos.add(pedido);
+
             }
 
             preparedStatement.close();
@@ -248,8 +294,8 @@ public class PedidoData {
 
         return pedidos;
     }
-    
-    public ArrayList<Pedido> pedidosCobrados(){
+
+    public ArrayList<Pedido> pedidosCobrados() {
         ArrayList<Pedido> pedidos = new ArrayList<>();
         Pedido pedido = null;
         String selectQuery = "SELECT * FROM pedido WHERE cobrada  = 1";
@@ -263,13 +309,15 @@ public class PedidoData {
                 Mesa mesa = mesaData.buscarMesaPorId(resultSet.getInt("id_mesa"));
 
                 pedido = new Pedido();
-                        pedido.setId_pedido(resultSet.getInt("id_pedido"));
-                        pedido.setMesa(mesa);
-                        pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
-                        pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
-                        pedido.setImporte(resultSet.getDouble("importe"));
-                        pedido.setCobrada(resultSet.getBoolean("cobrada"));
-                        pedido.setHora(resultSet.getTime("hora").toLocalTime());
+                pedido.setId_pedido(resultSet.getInt("id_pedido"));
+                pedido.setMesa(mesa);
+                pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
+                pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
+                pedido.setImporte(resultSet.getDouble("importe"));
+                pedido.setCobrada(resultSet.getBoolean("cobrada"));
+                pedido.setHora(resultSet.getTime("hora").toLocalTime());
+
+                pedidos.add(pedido);
             }
 
             preparedStatement.close();
@@ -280,9 +328,41 @@ public class PedidoData {
 
         return pedidos;
     }
-    
-    //Listar por mesero   
-    
+
+    public ArrayList<Pedido> pedidosTodos() {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        Pedido pedido = null;
+        String selectQuery = "SELECT * FROM pedido";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                Mesa mesa = mesaData.buscarMesaPorId(resultSet.getInt("id_mesa"));
+
+                pedido = new Pedido();
+                pedido.setId_pedido(resultSet.getInt("id_pedido"));
+                pedido.setMesa(mesa);
+                pedido.setNombre_mesero(resultSet.getString("nombre_mesero"));
+                pedido.setFecha(resultSet.getDate("fecha").toLocalDate());
+                pedido.setImporte(resultSet.getDouble("importe"));
+                pedido.setCobrada(resultSet.getBoolean("cobrada"));
+                pedido.setHora(resultSet.getTime("hora").toLocalTime());
+
+                pedidos.add(pedido);
+            }
+
+            preparedStatement.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener pedidos cobrados. Error al acceder a la tabla Pedidos: " + ex.getMessage());
+        }
+
+        return pedidos;
+    }
+
     //ESTE NO SERVIRÍA
     public void eliminarPedidoDefinitivamente(Pedido pedido) {
         int id = pedido.getId_pedido();
@@ -297,7 +377,7 @@ public class PedidoData {
             }
 
             preparedStatement.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se pudo eliminar el pedido. Error al acceder a la tabla Pedidos: " + ex.getMessage());
         }
