@@ -1,6 +1,7 @@
 
 package restaurante.Vistas;
 
+import java.awt.event.KeyEvent;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +28,7 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         Escritorio = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboMesa = new javax.swing.JComboBox<>();
@@ -39,8 +41,8 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jbAñadir = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jrbCobrado = new javax.swing.JRadioButton();
-        jLabel6 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         jLabel1.setText("Añadir Pedido");
 
@@ -50,11 +52,27 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
             }
         });
 
+        jtfMesero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfMeseroActionPerformed(evt);
+            }
+        });
+        jtfMesero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfMeseroKeyReleased(evt);
+            }
+        });
+
         jtfHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtfHora.setText("hh:mm");
         jtfHora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfHoraActionPerformed(evt);
+            }
+        });
+        jtfHora.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfHoraKeyReleased(evt);
             }
         });
 
@@ -80,7 +98,11 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel6.setText("Cobrado");
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("jRadioButton1");
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("jRadioButton2");
 
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
@@ -99,31 +121,34 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EscritorioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(EscritorioLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfHora, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, EscritorioLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jrbCobrado)
-                        .addGap(45, 45, 45)))
-                .addGap(127, 127, 127))
+                .addGap(18, 18, 18)
+                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfHora, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(129, 129, 129))
+            .addGroup(EscritorioLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jRadioButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButton2)
+                .addGap(75, 75, 75))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritorioLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36)
+                .addGap(12, 12, 12)
+                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(18, 18, 18)
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -141,14 +166,7 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EscritorioLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jrbCobrado))
-                    .addGroup(EscritorioLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbAñadir))
@@ -183,7 +201,8 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
         pedido.setFecha(jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         pedido.setHora(obtenerHora().toLocalTime());
         pedido.setImporte(0.0);
-        pedido.setCobrada(jrbCobrado.isSelected());
+        
+        
         
         pedidoData.agregarPedido(pedido);
         
@@ -199,21 +218,42 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfHoraActionPerformed
 
+    private void jtfMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfMeseroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfMeseroActionPerformed
+
+    private void jtfMeseroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfMeseroKeyReleased
+
+        if (!(Character.isLetter(evt.getKeyChar())) && !(evt.getKeyChar() == KeyEvent.VK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_LEFT) && !(evt.getKeyChar() == KeyEvent.VK_RIGHT)) {
+    evt.consume();
+}
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfMeseroKeyReleased
+
+    private void jtfHoraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfHoraKeyReleased
+
+        if (!(Character.isDigit(evt.getKeyChar())) && !(evt.getKeyChar() == ':') && !(evt.getKeyChar() == KeyEvent.VK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_LEFT) && !(evt.getKeyChar() == KeyEvent.VK_RIGHT)) {
+    evt.consume();
+}
+ 
+    }//GEN-LAST:event_jtfHoraKeyReleased
+
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Escritorio;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<Mesa> jComboMesa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JButton jbAñadir;
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdcFecha;
-    private javax.swing.JRadioButton jrbCobrado;
     private javax.swing.JTextField jtfHora;
     private javax.swing.JTextField jtfMesero;
     // End of variables declaration//GEN-END:variables
@@ -245,11 +285,10 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
         jtfMesero.setText("");
         jtfHora.setText("");
         jdcFecha.setDate(null);
-        jrbCobrado.setSelected(false);
     }
     
     private void cargarCombo(){
-        List<Mesa> mesas = mesaData.listarMesaOcupadas();
+        List<Mesa> mesas = mesaData.listarTodasLasMesas();
         for(Mesa mesa : mesas){
             jComboMesa.addItem(mesa);
         }

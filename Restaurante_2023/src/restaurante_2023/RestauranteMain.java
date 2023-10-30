@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package restaurante_2023;
 
 import java.time.LocalDate;
@@ -11,14 +8,13 @@ import java.util.ArrayList;
 import restaurante.Data.Conexion;
 import restaurante.Data.MesaData;
 import restaurante.Data.PedidoData;
+import restaurante.Data.PedidoProductoData;
+import restaurante.Data.ProductoData;
 import restaurante.Entidades.Mesa;
 import restaurante.Entidades.Pedido;
 import restaurante.Entidades.PedidoProducto;
+import restaurante.Entidades.Producto;
 
-/**
- *
- * @author MaRio
- */
 public class RestauranteMain {
 
     /**
@@ -28,6 +24,8 @@ public class RestauranteMain {
         
         MesaData mesaData = new MesaData();
         PedidoData pedidoData = new PedidoData();
+        ProductoData productoData = new ProductoData();
+        PedidoProductoData ppData = new PedidoProductoData();
 //        Agregar mesas**********************************
 //        Mesa mesa1 = new Mesa(1, true, 4);
 //        Mesa mesa2 = new Mesa(2, false, 2);
@@ -50,10 +48,21 @@ public class RestauranteMain {
 //Mesa mesaY = new Mesa(7, false, 2);
 //mesaData.agregarMesa(mesaY);
 Mesa mesaEncontrada = mesaData.buscarMesaPorId(1);
-Pedido pedido3= new Pedido(mesaEncontrada, "Luciana", LocalDate.of(2023,11,11), 0.0, false, LocalTime.of(19, 55));
-pedidoData.agregarPedido(pedido3);
-pedido3.setNombre_mesero("Pedro");
-pedidoData.modificarPedido(pedido3);
+        System.out.println("Mesa 1: " + mesaEncontrada +"\n*********************");
+Mesa mesaEncontrada2 = mesaData.buscarMesaPorId(2);
+        System.out.println("Mesa 2: " + mesaEncontrada2 +"\n*********************");
+
+
+//Producto producto1 = productoData.obtenerProducto(2);
+//Pedido pedido3= new Pedido(mesaEncontrada, "Chilindrina", LocalDate.of(2023,11,11), 0.0, false, LocalTime.of(19, 55));
+//pedidoData.agregarPedido(pedido3);
+//int cantidad = 2;
+//double precio = producto1.getPrecio();
+//
+//pedido3.setNombre_mesero("Pedro");
+//pedidoData.modificarPedido(pedido3);
+//PedidoProducto pedidoP = new PedidoProducto(pedido3, producto1, cantidad, (precio*cantidad));
+//ppData.agregarPedidoProducto(pedidoP);
 
 //pedido3.setImporte(7000);
 

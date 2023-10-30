@@ -23,6 +23,12 @@ public class Pedido {
 
     public Pedido() {
     }
+
+    public Pedido(int id_pedido, Mesa mesa, String nombre_mesero) {
+        this.id_pedido = id_pedido;
+        this.mesa = mesa;
+        this.nombre_mesero = nombre_mesero;
+    }
     
     
 

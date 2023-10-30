@@ -31,6 +31,10 @@ public class Mesa {
         this.capacidad = capacidad;
     }
 
+    public Mesa(int numero) {
+        this.numero = numero;
+    }   
+    
     public int getIdMesa() {
         return idMesa;
     }

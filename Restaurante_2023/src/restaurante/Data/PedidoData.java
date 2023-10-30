@@ -56,6 +56,33 @@ public class PedidoData {
         }
     }
 
+    public void actualizarImporte(double subtotal, Pedido pedido){
+        String updateQuery = "UPDATE pedido SET importe = ? WHERE id_pedido = ?";
+        int idPedido = pedido.getId_pedido();
+        double importe = pedido.getImporte();
+        double total = importe + subtotal;
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+            preparedStatement.setDouble(1, total);
+            preparedStatement.setInt(2, idPedido);
+            
+              if (preparedStatement.executeUpdate() != 0) {
+                  System.out.println( "Pedido modificado");
+            } else {
+                
+                 System.out.println( "No existe el pedido/no se pudooo");
+            }
+            preparedStatement.close();
+            
+        } catch (SQLException ex) {
+
+             System.out.println( "No se pudo actualizar el importe. Error al acceder a la tabla Pedidos: " + ex.getMessage());
+        }
+        
+        
+    }
+    
     public void modificarPedido(Pedido pedido) {
         System.out.println("Entro a modificar");
         String updateQuery = "UPDATE pedido SET nombre_mesero = ?, fecha = ?, cobrada = ?, hora = ? WHERE id_pedido = ?";

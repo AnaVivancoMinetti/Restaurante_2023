@@ -42,7 +42,7 @@ public class MesaData {
     public Mesa buscarMesaPorId(int idMesa){
         
         Mesa mesa = null;
-        String selectQuery = "SELECT numero_mesa, estado_mesa, capacidad FROM mesa WHERE id_mesa = ? AND estado_mesa = 1";
+        String selectQuery = "SELECT numero_mesa, estado_mesa, capacidad FROM mesa WHERE id_mesa = ?";
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(selectQuery);
@@ -79,6 +79,28 @@ public class MesaData {
                         resultSet.getInt("capacidad"));
                 
                 
+                mesas.add(mesa);
+            }
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa" + ex.getMessage());
+        }
+        return mesas;
+    }
+    
+    public List<Mesa> listarTodasLasMesas() {
+        List<Mesa> mesas = new ArrayList<>();
+        try {
+            String selectQuery = "SELECT * FROM mesa";
+            PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Mesa mesa = new Mesa(
+                        resultSet.getInt("id_mesa"),
+                        resultSet.getInt("numero_mesa"),
+                        resultSet.getBoolean("estado_mesa"), 
+                        resultSet.getInt("capacidad"));
+
                 mesas.add(mesa);
             }
             preparedStatement.close();

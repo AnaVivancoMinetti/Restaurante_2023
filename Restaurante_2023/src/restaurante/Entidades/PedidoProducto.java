@@ -32,7 +32,7 @@ public class PedidoProducto {
         this.producto = producto;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
-    }
+    }    
 
     public int getId_pedido_producto() {
         return id_pedido_producto;
