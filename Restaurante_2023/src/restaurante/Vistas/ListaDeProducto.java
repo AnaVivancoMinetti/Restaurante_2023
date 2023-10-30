@@ -27,6 +27,7 @@ private DefaultTableModel model = new DefaultTableModel();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -58,6 +59,7 @@ private DefaultTableModel model = new DefaultTableModel();
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 110));
 
+        buttonGroup1.add(jrbProductosActivos);
         jrbProductosActivos.setText("VerActivas");
         jrbProductosActivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +68,7 @@ private DefaultTableModel model = new DefaultTableModel();
         });
         jPanel1.add(jrbProductosActivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
 
+        buttonGroup1.add(jrbProductosNoActivos);
         jrbProductosNoActivos.setText("VerInactivas");
         jrbProductosNoActivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,17 +103,19 @@ private DefaultTableModel model = new DefaultTableModel();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbProductosActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbProductosActivosActionPerformed
-         if (jrbProductosActivos.isSelected()) {
+        
+        if (jrbProductosActivos.isSelected()) {
             mostrarProductoActivo();
-            
+           
        }
-//clearTable();
+
     }//GEN-LAST:event_jrbProductosActivosActionPerformed
 
     private void jrbProductosNoActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbProductosNoActivosActionPerformed
-       if (jrbProductosNoActivos.isSelected()) {
+     
+        if (jrbProductosNoActivos.isSelected()) {
            mostrarProductoNoActivo();
-        
+      
     }
   
     }//GEN-LAST:event_jrbProductosNoActivosActionPerformed
@@ -121,6 +126,7 @@ private DefaultTableModel model = new DefaultTableModel();
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -137,7 +143,14 @@ private DefaultTableModel model = new DefaultTableModel();
     for(;i>=0;i--){
         model.removeRow(i);
     }
+   }
+    private void limpiarCampos(){
+  
+        jrbProductosActivos.setText("f ");
+        jrbProductosNoActivos.setText(" ");
 }
+
+
     private void armarCabecera() {
         model.addColumn("id_producto");
     model.addColumn("nombre");
@@ -181,8 +194,11 @@ model.setRowCount(0); // Limpia la tabla antes de agregar nuevas filas
         }   
     
  }
+  
 
 
+    
+ 
 }
 
 

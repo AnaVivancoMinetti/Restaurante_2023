@@ -2,6 +2,8 @@
 package restaurante.Vistas;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import restaurante.Data.ProductoData;
 import restaurante.Entidades.Producto;
@@ -147,39 +149,36 @@ public class ModificarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-      int id = Integer.parseInt(jTextFieldBscarId.getText());
+       try{
+        int id = Integer.parseInt(jTextFieldBscarId.getText());
     String nombreProducto = jTextFieldNombre.getText();
-    double precio = Double.parseDouble(jTextFieldPrecio.getText()); // Obtiene el precio ingresado en el campo de texto y lo convierte a un valor decimal.
-int stock = (int) jSpinnerStock.getValue(); // Obtiene la cantidad de stock seleccionada en el spinner.
-boolean estado = jRadioButtonEstado.isSelected(); // Obtiene el estado de la casilla de verificación (activo o inactivo).
-    
-   Producto producto = new Producto(id,nombreProducto, precio, stock, estado);
-   
-   productoData.modificarProducto(producto);
-//if (producto != null) {
-        // Actualiza los datos del producto con las modificaciones
-//        producto.setPrecio(precio);
-//        producto.setStock(stock);
-//        producto.setEstado(estado);
-//   if (productoData.modificarProducto(producto)) {
-//            JOptionPane.showMessageDialog(this, "Los cambios se modificaron exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-//
-////             Deshabilita la edición de campos
-//            jTextFieldNombre.setEnabled(false);
-//        jTextFieldPrecio.setEnabled(false);
-//        jSpinnerStock.setEnabled(false);
-//        jRadioButtonEstado.setEnabled(false);
+    String precioTexto = jTextFieldPrecio.getText().trim(); // Elimina espacios en blanco al principio y al final
+    validarCampo(nombreProducto);
+double precio;
+        
+        if (!precioTexto.isEmpty()) {
+            if (contieneSoloNumeros(precioTexto)) {
+                precio = Double.parseDouble(precioTexto);
+            } else {
+                JOptionPane.showMessageDialog(null, "El precio debe contener solo números.");
+                return; // Salir del método si el precio contiene letras o caracteres no válidos
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El precio no puede estar vacío.");
+            return; // Salir del método si el precio está vacío
+        }
 
-//} else {
-//            JOptionPane.showMessageDialog(this, "Error al modificar los cambios.", "Error", JOptionPane.ERROR_MESSAGE);
-  // }
-//    } else {
-//        JOptionPane.showMessageDialog(this, "El producto no se encontró en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-//    
-//
-//
-//            }
-//limpiarCampos();
+        int stock = (int) jSpinnerStock.getValue();
+        boolean estado = jRadioButtonEstado.isSelected();
+    
+        Producto producto = new Producto(id, nombreProducto, precio, stock, estado);
+   
+        productoData.modificarProducto(producto);
+       } catch (NumberFormatException e) {
+           System.out.println("No se admiten números"); 
+       }
+       limpiarCampos();
+
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
@@ -221,11 +220,37 @@ boolean estado = jRadioButtonEstado.isSelected(); // Obtiene el estado de la cas
     // End of variables declaration//GEN-END:variables
 
 private void limpiarCampos(){
+    jTextFieldBscarId.setText(" ");
     jTextFieldNombre.setText(" ");
         jTextFieldPrecio.setText(" ");
         jSpinnerStock.setValue((Integer)0);
         jRadioButtonEstado.setSelected(false);
+        
 }
+public void validarCampo(String text){
 
+    if(text.isEmpty()){
+         JOptionPane.showMessageDialog(null, "No se admiten campos vacios");
+    }
+    if(contieneSoloNumeros(text)){
+         JOptionPane.showMessageDialog(null, "No se admiten campos CON NUMEROS");
+    }
+   
+}
+public static boolean contieneSoloNumeros(String text) {
+        Pattern pattern = Pattern.compile("[0-9]+");// Valida que solo sean numeros (expresiones regulares)
+        Matcher matcher = pattern.matcher(text); // Compara el texto con lo que le pasamos de patron.
+
+        return matcher.matches(); // retorna verdadero si el patron que le pasamos arriba se cumple con el texto.
+    }
+public void validarCampoPrecio(String text) {
+        if (text.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se admiten campos vacíos");
+        } else if (contieneSoloNumeros(text)) {
+//            JOptionPane.showMessageDialog(null, "No se admiten campos Letras");
+        }else if(!contieneSoloNumeros(text)){
+            JOptionPane.showMessageDialog(null, "No se admiten campos Letras");
+        }
+    }
 
 }
