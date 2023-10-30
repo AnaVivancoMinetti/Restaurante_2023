@@ -28,7 +28,6 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         Escritorio = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboMesa = new javax.swing.JComboBox<>();
@@ -41,8 +40,6 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jbAñadir = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
 
         jLabel1.setText("Añadir Pedido");
 
@@ -98,12 +95,6 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("jRadioButton1");
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("jRadioButton2");
-
         javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
@@ -132,23 +123,13 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
                     .addComponent(jtfHora, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(129, 129, 129))
-            .addGroup(EscritorioLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton2)
-                .addGap(75, 75, 75))
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EscritorioLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(12, 12, 12)
-                .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(18, 18, 18)
+                .addGap(58, 58, 58)
                 .addGroup(EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -233,24 +214,21 @@ public class AñadirPedido extends javax.swing.JInternalFrame {
     private void jtfHoraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfHoraKeyReleased
 
         if (!(Character.isDigit(evt.getKeyChar())) && !(evt.getKeyChar() == ':') && !(evt.getKeyChar() == KeyEvent.VK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) && !(evt.getKeyChar() == KeyEvent.VK_LEFT) && !(evt.getKeyChar() == KeyEvent.VK_RIGHT)) {
-    evt.consume();
-}
- 
+            evt.consume();
+        }
+
     }//GEN-LAST:event_jtfHoraKeyReleased
 
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Escritorio;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<Mesa> jComboMesa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JButton jbAñadir;
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdcFecha;

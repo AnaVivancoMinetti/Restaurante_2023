@@ -11,10 +11,11 @@ import restaurante.Entidades.Mesa;
 public class MesaData {
     
     private Connection connection = null;
-
+    
     public MesaData() {
         this.connection = Conexion.getConexion();
     }
+    
     
     public void agregarMesa(Mesa mesa){
     
