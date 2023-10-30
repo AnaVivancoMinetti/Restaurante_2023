@@ -1,6 +1,8 @@
 
 package restaurante.Vistas;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import restaurante.Data.ProductoData;
 import restaurante.Entidades.Producto;
@@ -43,6 +45,7 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -99,24 +102,14 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/restaurante/Imagenes/IMAGEN FONDO.jpg"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 370));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrecioActionPerformed
-        // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_jTextFieldPrecioActionPerformed
 
     private void jRadioButtonEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEstadoActionPerformed
@@ -124,8 +117,11 @@ public class AgregarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButtonEstadoActionPerformed
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-       String nombreproducto = jTextFieldNombre.getText(); // Obtiene el nombre del producto ingresado en el campo de texto.
-
+       
+        try{
+            String nombreproducto = jTextFieldNombre.getText().trim(); // Obtiene el nombre del producto ingresado en el campo de texto y elimina espacios en blanco al principio y al final. // Obtiene el nombre del producto ingresado en el campo de texto.
+validarCampo(nombreproducto);
+validarCampoPrecio(jTextFieldPrecio.getText());
 double precio = Double.parseDouble(jTextFieldPrecio.getText()); // Obtiene el precio ingresado en el campo de texto y lo convierte a un valor decimal.
 int stock = (int) jSpinnerStock.getValue(); // Obtiene la cantidad de stock seleccionada en el spinner.
 boolean estado = jRadioButtonEstado.isSelected(); // Obtiene el estado de la casilla de verificación (activo o inactivo).
@@ -134,9 +130,13 @@ Producto producto = new Producto(nombreproducto, precio, stock, estado);
 // Crea un objeto "Producto" con los valores obtenidos. Este objeto representa el nuevo producto que se va a agregar.
 
 productoData.agregarProducto(producto);
+
 // Llama al método "agregarProducto" de la clase "ProductoData" para agregar el producto a la base de datos.
 // El resultado (éxito o fracaso) se almacena en la variable "insertado".
-  
+        }catch(NumberFormatException e){
+            System.out.println("No se admiten numeros"); 
+        }
+      limpiarCampos();  
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
@@ -169,155 +169,36 @@ private void limpiarCampos(){
         jRadioButtonEstado.setSelected(false);
 }
 
+public void validarCampo(String text){
+
+    if(text.isEmpty()){
+         JOptionPane.showMessageDialog(null, "No se admiten campos vaciaos");
+    }
+    if(contieneSoloNumeros(text)){
+         JOptionPane.showMessageDialog(null, "No se admiten campos CON NUMEROS");
+    }
+   
+}
+public static boolean contieneSoloNumeros(String text) {
+        Pattern pattern = Pattern.compile("[0-9]+");// Valida que solo sean numeros (expresiones regulares)
+        Matcher matcher = pattern.matcher(text); // Compara el texto con lo que le pasamos de patron.
+
+        return matcher.matches(); // retorna verdadero si el patron que le pasamos arriba se cumple con el texto.
+    }
+public void validarCampoPrecio(String text) {
+        if (text.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se admiten campos vacíos");
+        } else if (contieneSoloNumeros(text)) {
+//            JOptionPane.showMessageDialog(null, "No se admiten campos Letras");
+        }else if(!contieneSoloNumeros(text)){
+            JOptionPane.showMessageDialog(null, "No se admiten campos Letras");
+        }
+    }
+
+
+
+
+
+
 
 }
-// public boolean existeProducto(Producto producto){
-//        boolean existe = false;
-//        
-//        String selectQuery = "SELECT * FROM producto WHERE nombre_producto = ?;";
-//        
-//        try{
-//            PreparedStatement prepareStatement = connection.prepareStatement(selectQuery);
-//            
-//            prepareStatement.setString(1, producto.getNombreProducto());
-//            
-//            ResultSet resultSet = prepareStatement.executeQuery();
-//            
-//            if(resultSet.next() && producto.getNombreProducto().equalsIgnoreCase(resultSet.getString("nombre_producto"))){
-//                existe = true;
-//            }
-//            
-//            prepareStatement.close();
-//            
-//        }catch(SQLException ex){
-//            JOptionPane.showMessageDialog(null, "Error al comparar productos" + ex);
-//        }
-//        
-//        return existe;
-//    }
-//  public boolean agregarProducto(Producto producto){
-//    if (existeProducto(producto)) {
-//        JOptionPane.showMessageDialog(null, "El producto ingresado ya existe");
-//        return false; // Producto ya existe, no se debe continuar con la inserción.
-//    }
-//    boolean insert = true;
-//        String insertQuery = "INSERT INTO producto(id_producto, nombre_producto, precio, stock, estado) VALUES (?, ?, ?, ?, ?);";
-//        
-//        try {
-//            PreparedStatement preparedStatemen = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-//            preparedStatemen.setInt(1, producto.getId_producto());
-//            preparedStatemen.setString(2, producto.getNombreProducto());
-//            preparedStatemen.setDouble(3, producto.getPrecio());
-//            preparedStatemen.setInt(4, producto.getStock());
-//            preparedStatemen.setBoolean(5, producto.isEstado());
-//            
-//
-//            preparedStatemen.executeUpdate();
-//            
-//            ResultSet resultSet = preparedStatemen.getGeneratedKeys();
-//            if (resultSet.next()) {
-//            producto.setId_producto(resultSet.getInt(1));
-//        } else {
-//            insert = false;
-//        }
-//        preparedStatemen.close();
-//    } catch (SQLException ex) {
-//        insert = false;
-//        JOptionPane.showMessageDialog(null, "Error al cargar el producto" + ex);
-//    }
-//
-//    return insert;
-//}
-// 
-//  public boolean modificarProducto(Producto producto){
-//      boolean update = false;
-//      String upDateQuery = "UPDATE producto SET nombre_producto = ?, precio = ?, stock = ?, estado = ? WHERE id_producto= ?;";
-// 
-//      PreparedStatement preparedStatemen;
-//      try {
-//          preparedStatemen = connection.prepareStatement(upDateQuery);//, Statement.RETURN_GENERATED_KEYS);
-//          
-//          
-//          preparedStatemen.setString(1, producto.getNombreProducto());
-//            preparedStatemen.setDouble(2, producto.getPrecio());
-//            preparedStatemen.setInt(3, producto.getStock());
-//            preparedStatemen.setBoolean(4, producto.isEstado());
-//            preparedStatemen.setInt(5, producto.getId_producto());
-//           
-//            
-//             
-//            if (preparedStatemen.executeUpdate()!=0) {
-//                update = true;
-//                JOptionPane.showMessageDialog(null, "Producto Modificado con exito.");
-//            }
-//            preparedStatemen.close();
-//                 
-//      } catch (SQLException ex) {
-//          JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto: " + ex.getMessage());
-//      }
-//     
-//      return false;
-//            
-//  }
-//
-//  
-//  public boolean EliminarProducto (int id_producto){
-//       boolean delete = false;
-//     String upDateQuery = "UPDATE producto SET estado = 1 WHERE id_producto=?";
-//   PreparedStatement preparedStatemen;
-//   
-//      try {
-//          preparedStatemen = connection.prepareStatement(upDateQuery, Statement.RETURN_GENERATED_KEYS);
-//      preparedStatemen.setInt(1,id_producto);
-//      
-//     if( preparedStatemen.executeUpdate()!=0){
-//                delete = true;
-//            }else{
-//                JOptionPane.showMessageDialog(null, "El producto que intenta eliminar no existe");
-//            }
-//            
-//            preparedStatemen.close();
-//                      
-//        }catch(SQLException ex){
-//            if(ex instanceof java.sql.SQLIntegrityConstraintViolationException){
-//                JOptionPane.showMessageDialog(null,"Error al eliminar. El producto es empleado por otras areas");
-//            }else{
-//                JOptionPane.showMessageDialog(null,"Error al eliminar el producto" + ex);
-//            }
-//        }
-//        
-//        return delete;
-//    }
-//public Producto obtenerProductoPorNnombre(String nombreProducto) {
-//    
-//    Producto producto = new Producto();
-//
-//    String selectQuery = "SELECT * FROM producto WHERE nombre_producto = ?";
-//
-//    try {
-//        PreparedStatement preparedStatemen = connection.prepareStatement(selectQuery);
-//
-//        preparedStatemen.setString(1, nombreProducto);
-//
-//        ResultSet resultSet = preparedStatemen.executeQuery();
-//
-//        if (resultSet.next()) {
-//           producto.setId_producto(resultSet.getInt("id_producto"));
-//           producto.setNombreProducto(resultSet.getString("nombre_producto"));
-//           producto.setPrecio(resultSet.getDouble("precio"));
-//           producto.setStock(resultSet.getInt("stock"));
-//           producto.setEstado(resultSet.getBoolean("estado"));         
-//        } else {
-//            JOptionPane.showMessageDialog(null, "El producto ingresado no existe");
-//        }
-//
-//        preparedStatemen.close();
-//
-//    } catch (SQLException ex) {
-//        JOptionPane.showMessageDialog(null, "Error al obtener el producto" + ex);
-//    }
-//
-//    return producto;
-//}
-//  
-//}

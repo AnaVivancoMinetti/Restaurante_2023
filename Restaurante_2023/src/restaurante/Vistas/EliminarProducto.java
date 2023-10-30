@@ -1,9 +1,12 @@
 
 package restaurante.Vistas;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import restaurante.Data.ProductoData;
 import restaurante.Entidades.Producto;
+import static restaurante.Vistas.ModificarProducto.contieneSoloNumeros;
 
 
 public class EliminarProducto extends javax.swing.JInternalFrame {
@@ -52,21 +55,21 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
 
         jLabel2.setText("NOMBRE");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 100, 50, -1));
-        jPanel1.add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 110, -1));
+        jPanel1.add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 110, -1));
 
         jLabel3.setText("PRECIO");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel5.setText("$");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 20, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 20, 20));
 
         jTextFieldPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldPrecioActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 60, -1));
+        jPanel1.add(jTextFieldPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 60, -1));
 
         jLabel4.setText("STOCK");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
@@ -130,7 +133,9 @@ public class EliminarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButtonEstadoActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-eliminarProducto();        
+
+        eliminarProducto();   
+
 limpiarCampos();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
@@ -140,7 +145,7 @@ limpiarCampos();
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
        String numeroProducto = jTextFieldNombre.getText();
-        
+        validarCampo(numeroProducto);
         
         Producto producto = productoData.obtenerProductoPorNnombre(numeroProducto);
         
@@ -171,42 +176,20 @@ limpiarCampos();
 
 public void eliminarProducto() {
 
-    String nombreProducto = jTextFieldNombre.getText();
-    
-    productoData.EliminarProducto(nombreProducto);
+ String nombreProducto = jTextFieldNombre.getText();
 
-//    if (!nombreProducto.isEmpty()) {
-//        Producto producto = productoData.obtenerProductoPorNnombre(nombreProducto);
-//
-//        if (producto != null) {
-//            if (producto.isEstado()) {
-//                jTextFieldPrecio.setText(Double.toString(producto.getPrecio()));
-//                jSpinnerStock.setValue(producto.getStock());
-//                jRadioButtonEstado.setSelected(true);
-//            } else {
-//                 jTextFieldPrecio.setText("");
-//                jSpinnerStock.setValue(0);
-//                jRadioButtonEstado.setSelected(false);
-//            }
-
-            // Muestra una ventana de diálogo para confirmar la eliminación
-//            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el producto?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-
-//            if (confirmacion == JOptionPane.YES_OPTION) {
-//                int id_producto = producto.getId_producto();
-//                if (productoData.EliminarProducto(id_producto)) {
-//                    JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente.");
-//                    
-//                }
+        if (!nombreProducto.isEmpty()) {
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el producto?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                productoData.EliminarProducto(nombreProducto);
+                JOptionPane.showMessageDialog(null, "Producto eliminado con éxito.");
+                limpiarCampos();
             }
-//        } else {
-//            JOptionPane.showMessageDialog(null, "El producto no existe.");
-//        }
-//    } else {
-//        JOptionPane.showMessageDialog(null, "Ingrese un nombre de producto.");
-//    }
-
-
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingresa un nombre de producto válido.");
+        }
+       
+}
 
 private void limpiarCampos(){
     jTextFieldNombre.setText(" ");
@@ -214,6 +197,22 @@ private void limpiarCampos(){
         jSpinnerStock.setValue((Integer)0);
         jRadioButtonEstado.setSelected(false);
 }
+public void validarCampo(String text){
 
+    if(text.isEmpty()){
+         JOptionPane.showMessageDialog(null, "No se admiten campos vaciaos");
+    }
+    if(contieneSoloNumeros(text)){
+         JOptionPane.showMessageDialog(null, "No se admiten campos CON NUMEROS");
+    }
+   
+}
+public static boolean contieneSoloNumeros(String text) {
+        Pattern pattern = Pattern.compile("[0-9]+");// Valida que solo sean numeros (expresiones regulares)
+        Matcher matcher = pattern.matcher(text); // Compara el texto con lo que le pasamos de patron.
+
+        return matcher.matches(); // retorna verdadero si el patron que le pasamos arriba se cumple con el texto.
+    }
 
 }
+
